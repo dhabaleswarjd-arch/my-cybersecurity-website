@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>CyberSafe - Cybersecurity</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #07111f;
+      color: white;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #0b1728;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid #1e3a5f;
+    }
+
+    header h1 {
+      color: #00ff88;
+      margin-bottom: 5px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    nav a:hover {
+      color: #00ff88;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 70px 20px;
+    }
+
+    .hero h2 {
+      font-size: 38px;
+      color: #00ff88;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      color: #b8c7d9;
+      max-width: 650px;
+      margin: auto;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    .card {
+      background: #0d1b2d;
+      border: 1px solid #1e3a5f;
+      border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 25px;
+    }
+
+    .card h2 {
+      color: #00ff88;
+      margin-bottom: 10px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      margin: 15px 0;
+      border: none;
+      border-radius: 8px;
+      background: #16283e;
+      color: white;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 13px 20px;
+      background: #00c96b;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #00ff88;
+      color: #07111f;
+    }
+
+    #result {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 8px;
+      display: none;
+    }
+
+    .tips {
+      margin-top: 15px;
+      padding-left: 20px;
+    }
+
+    .tips li {
+      margin-bottom: 8px;
+      color: #c8d5e3;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      background: #0b1728;
+      color: #9aaabd;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>🛡️ CyberSafe</h1>
+    <p>Learn Cybersecurity Safely</p>
+
+    <br>
+
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#checker">Link Checker</a>
+      <a href="#tips">Safety Tips</a>
+    </nav>
+  </header>
+
+
+  <section class="hero" id="home">
+    <h2>Cybersecurity Awareness</h2>
+
+    <p>
+      Learn how to stay safe online, recognize suspicious links,
+      and protect your personal information.
+    </p>
+  </section>
+
+
+  <main class="container">
+
+    <section class="card" id="checker">
+
+      <h2>🔎 Phishing Link Checker</h2>
+
+      <p>
+        This is a safe educational demo. It checks a URL for
+        some common warning signs. It does not hack or access websites.
+      </p>
+
+      <input
+        type="text"
+        id="urlInput"
+        placeholder="Example: https://example.com"
+      >
+
+      <button onclick="checkURL()">
+        Check Link
+      </button>
+
+      <div id="result"></div>
+
+    </section>
+
+
+    <section class="card" id="tips">
+
+      <h2>🔐 Cyber Safety Tips</h2>
+
+      <ul class="tips">
+        <li>Never share your password with anyone.</li>
+        <li>Use strong and unique passwords.</li>
+        <li>Be careful with unknown links.</li>
+        <li>Enable two-factor authentication when possible.</li>
+        <li>Keep your phone and apps updated.</li>
+        <li>Don't download files from suspicious websites.</li>
+      </ul>
+
+    </section>
+
+
+    <section class="card">
+
+      <h2>📚 Learn Cybersecurity</h2>
+
+      <p>
+        Cybersecurity means protecting computers, phones,
+        networks, accounts, and information from unauthorized access
+        and other online threats.
+      </p>
+
+    </section>
+
+  </main>
+
+
+  <footer>
+    <p>© 2026 CyberSafe | Educational Cybersecurity Project</p>
+  </footer>
+
+
+  <script>
+
+    function checkURL() {
+
+      const input = document.getElementById("urlInput");
+      const result = document.getElementById("result");
+
+      const url = input.value.trim().toLowerCase();
+
+      if (url === "") {
+        result.style.display = "block";
+        result.innerHTML = "⚠️ Please enter a URL.";
+        return;
+      }
+
+      let warnings = [];
+
+      if (!url.startsWith("https://")) {
+        warnings.push("The link does not use HTTPS.");
+      }
+
+      if (url.includes("@")) {
+        warnings.push("The URL contains @, which can be suspicious.");
+      }
+
+      if (url.includes("login") ||
+          url.includes("verify") ||
+          url.includes("account")) {
+        warnings.push("The URL contains words commonly used in phishing messages.");
+      }
+
+      if (url.length > 100) {
+        warnings.push("The URL is unusually long.");
+      }
+
+      result.style.display = "block";
+
+      if (warnings.length === 0) {
+
+        result.innerHTML =
+          "✅ No obvious warning signs detected.<br><br>" +
+          "Remember: this demo cannot guarantee that a website is safe.";
+
+      } else {
+
+        result.innerHTML =
+          "⚠️ Potential warning signs:<br><br>" +
+          warnings.map(w => "• " + w).join("<br>") +
+          "<br><br>Don't enter passwords or personal information unless you trust the website.";
+
+      }
+    }
+
+  </script>
+
+</body>
+</html>
